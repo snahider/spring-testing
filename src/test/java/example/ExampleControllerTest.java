@@ -60,22 +60,5 @@ public class ExampleControllerTest {
         assertThat(greeting, is("Who is this 'Pan' you're talking about?"));
     }
 
-    @Test
-    public void shouldReturnWeatherClientResult() throws Exception {
-        WeatherResponse weatherResponse = new WeatherResponse("raining", "a light drizzle");
-        given(weatherClient.fetchWeather()).willReturn(Optional.of(weatherResponse));
-
-        var weather = subject.weather();
-
-        assertThat(weather, is("raining: a light drizzle"));
-    }
-
-    @Test
-    public void shouldReturnErrorMessageIfWeatherClientIsUnavailable() throws Exception {
-        given(weatherClient.fetchWeather()).willReturn(Optional.empty());
-
-        var weather = subject.weather();
-
-        assertThat(weather, is("Sorry, I couldn't fetch the weather for you :("));
-    }
+    
 }
