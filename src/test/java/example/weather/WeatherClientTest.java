@@ -39,14 +39,4 @@ public class WeatherClientTest {
 
         assertThat(actualResponse, is(Optional.of(expectedResponse)));
     }
-
-    @Test
-    public void shouldReturnEmptyOptionalIfWeatherServiceIsUnavailable() throws Exception {
-        given(restTemplate.getForObject("http://localhost:8089/data/2.5/weather?q=Hamburg,de&appid=someAppId", WeatherResponse.class))
-                .willThrow(new RestClientException("something went wrong"));
-
-        var actualResponse = subject.fetchWeather();
-
-        assertThat(actualResponse, is(Optional.empty()));
-    }
 }
