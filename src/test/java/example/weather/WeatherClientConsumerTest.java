@@ -23,11 +23,32 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest
 public class WeatherClientConsumerTest {
 
+    @Autowired
+    private WeatherClient weatherClient;
+
     @Rule
-    public WireMockRule wireMockRule = new WireMockRule(8089);
+    public PactProviderRule weatherProvider = new PactProviderRule
+            ("weather_provider", "localhost", 8089, this);
+
+    @Pact(consumer="sample_microservice")
+    public RequestResponsePact createPact(PactDslWithProvider builder) throws IOException {
+        return builder
+                .given("weather forecast data")
+                .uponReceiving("a request for a weather request for Hamburg")
+                    .path("/data/2.5/weather")
+                    .query("q=Hamburg,de&appid=someAppId")
+                    .method("GET")
+                .willRespondWith()
+                    .status(200)
+                    .body(FileLoader.read("classpath:weatherApiResponse.json"), ContentType.APPLICATION_JSON)
+                .toPact();
+    }
 
     @Test
-    public void shouldCallWeatherService() throws Exception {
-
+    @PactVerification("weather_provider")
+    public void shouldFetchWeatherInformation() throws Exception {
+        var weatherResponse = weatherClient.fetchWeather();
+        assertThat(weatherResponse.isPresent(), is(true));
+        assertThat(weatherResponse.get().getSummary(), is("raining: a light drizzle"));
     }
 }
