@@ -23,8 +23,11 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest
 public class WeatherClientConsumerTest {
 
-    @Autowired
-    private WeatherClient weatherClient;
+    @Rule
+    public WireMockRule wireMockRule = new WireMockRule(8089);
 
-    
+    @Test
+    public void shouldCallWeatherService() throws Exception {
+
+    }
 }
