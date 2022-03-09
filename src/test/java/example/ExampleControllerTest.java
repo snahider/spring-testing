@@ -7,9 +7,11 @@ import example.weather.WeatherClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.anyString;
 import static org.mockito.BDDMockito.given;
 
-@ExtendWith(MockitoExtension.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ExampleControllerTest {
 
     @InjectMocks
