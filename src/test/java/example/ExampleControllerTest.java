@@ -62,6 +62,6 @@ public class ExampleControllerTest {
         assertThat(greeting, is("Who is this 'Pan' you're talking about?"));
     }
 
-    //INSERT_TESTS_HERE
+//INSERT_HERE
     
 }
