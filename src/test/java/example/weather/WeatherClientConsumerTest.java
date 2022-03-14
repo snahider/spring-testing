@@ -30,8 +30,11 @@ public class WeatherClientConsumerTest {
     public PactProviderRule weatherProvider = new PactProviderRule
             ("weather_provider", "localhost", 8089, this);
 
+//PACT_FILE
+    
     @Test
+    @PactVerification("weather_provider")
     public void shouldFetchWeatherInformation() throws Exception {
-
+//PACT_TEST
     }
 }
