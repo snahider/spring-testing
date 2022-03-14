@@ -29,6 +29,6 @@ public class WeatherClientIntegrationTest {
 
     @Test
     public void shouldCallWeatherService() throws Exception {
-
+//INSERT_HERE
     }    
 }
